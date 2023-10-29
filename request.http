@@ -1,0 +1,101 @@
+//Metodos de usuarios
+POST http://localhost:3000/usuario/add HTTP/1.1
+Content-Type: application/json
+
+{
+    "usuario_id":3,
+    "nombre":"Jose Saul Gomez Mascafierro",
+    "email":"saul12128@example"
+}
+
+###
+GET http://localhost:3000/usuario/ HTTP/1.1
+
+###
+GET http://localhost:3000/usuario/buscar/ HTTP/1.1
+Content-Type: application/json
+
+{ "email": "jrmich3@hotmail.com" }
+###
+DELETE http://localhost:3000/usuario/delete/2 HTTP/1.1
+
+###
+PUT http://localhost:3000/usuario/update/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre":"Michel",
+    "email": "jrmich3@hotmail.com"
+}
+
+
+
+//Metodos de publicaciones
+###
+POST http://localhost:3000/publicacion/add HTTP/1.1
+Content-Type: application/json
+
+{
+    "publicacion_id":1,
+    "titulo":"Texto de relleno para la practica",
+    "contenido":"Texto de relleno",
+    "fecha_creacion": "2022-09-23",
+    "usuario_id":3
+}
+
+###
+GET http://localhost:3000/publicacion/ HTTP/1.1
+
+###
+GET http://localhost:3000/publicacion/1 HTTP/1.1
+###
+PUT http://localhost:3000/publicacion/modificar/1
+Content-Type: application/json
+
+{
+    "titulo":"Texto de relleno para el metodo",
+    "contenido":"Si cambia las cosas"
+}
+###
+DELETE http://localhost:3000/publicacion/delete HTTP/1.1
+Content-Type:  application/json
+
+{
+    "fecha_creacion": "2023-01-13"
+}
+
+
+
+//Metodos de comentarios
+###
+POST http://localhost:3000/comentario/add HTTP/1.1
+Content-Type: application/json
+
+{
+    "comentario_id": 3,
+    "contenido" : "Azul es mi color",
+    "fecha_creacion" : "2013-12-11",
+    "publicacion_id" : 1,
+    "usuario_id" :1
+}
+
+###
+GET http://localhost:3000/comentario/ HTTP/1.1
+###
+GET http://localhost:3000/comentario/2 HTTP/1.1
+###
+PUT http://localhost:3000/comentario/modificar/1 HTTP/1.1
+Content-Type:  application/json
+
+{
+    "contenido" : "Rojo es mi color"
+}
+###
+DELETE http://localhost:3000/comentario/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "fecha_creacion" : "2013-12-11",
+    "publicacion_id" : 1
+}
+
