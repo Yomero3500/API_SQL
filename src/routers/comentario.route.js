@@ -52,7 +52,7 @@ routerComentario.put("/modificar/:id", async (req,res)=>{
               comentario_id: comentario_id
           }
       })
-      res.send("Comentario Modificado");
+      res.send(usuario_actualizado);
   }catch(error){
       res.status(500).json({error: "Error al modificar los datos"});
       console.log(error);
