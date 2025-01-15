@@ -10,10 +10,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/buscar", async (req, res) => {
-  const email = req.body.email;
+router.get("/buscar",async (req, res) => {
+  const { email, password } = req.body;
   try { 
-    const user = await Usuario.findOne({where: {email: email}})
+    const user = await Usuario.findOne({where: {email: email , password: password}});
     res.send(user);
   } catch (error) {
     res.status(500).json({ error: "Ha ocurrido un error" });
@@ -21,13 +21,12 @@ router.get("/buscar", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-  const { usuario_id, nombre, email } = req.body;
+  const {email, password } = req.body;
   try { 
     await Usuario.sync()
     const usuario = await Usuario.create({
-      usuario_id: usuario_id,
-      nombre: nombre,
-      email: email
+      email: email,
+      password: password
     });
     res.json(usuario);
   } catch (error) {
@@ -35,6 +34,8 @@ router.post("/add", async (req, res) => {
     console.log(error);
   }
 });
+
+
 router.put("/update/:usuario_id", async (req, res) => {
   const usuario_id = req.params.usuario_id;
   const { nombre, email } = req.body;
