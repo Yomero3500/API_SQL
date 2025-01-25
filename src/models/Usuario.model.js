@@ -8,6 +8,9 @@ const Usuario= sequelize.define('Usuario', {
   password: {
     type: DataTypes.STRING
   }
+},
+ {
+  timestamps: false
 });
 
 module.exports = Usuario;

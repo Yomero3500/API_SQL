@@ -10,10 +10,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
-  const { nombre } = req.body;
+router.get("/:nombre", async (req, res) => {
   try {
-    const product = await Product.findOne({ where: { nombre: nombre } });
+    const product = await Product.findOne({ where: { nombre: req.params.nombre } });
     if (product) {
       res.json(product);
     } else {

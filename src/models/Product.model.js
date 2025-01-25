@@ -20,6 +20,9 @@ const Product = sequelize.define('Product', {
         type: DataTypes.BLOB("medium"),
         allowNull: false
     }
-});
+},
+ {
+    timestamps: false
+ });
 
 module.exports = Product;
