@@ -10,11 +10,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/buscar",async (req, res) => {
+router.post("/login",async (req, res) => {
   const { email, password } = req.body;
   try { 
     const user = await Usuario.findOne({where: {email: email , password: password}});
-    res.send(user);
+    //res.send(user);
+    res.status(200).json({ message: "Login exitoso", success: true, user: user });
   } catch (error) {
     res.status(500).json({ error: "Ha ocurrido un error" });
   }
