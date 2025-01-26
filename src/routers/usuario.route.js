@@ -14,8 +14,12 @@ router.post("/login",async (req, res) => {
   const { email, password } = req.body;
   try { 
     const user = await Usuario.findOne({where: {email: email , password: password}});
-    //res.send(user);
-    res.status(200).json({ message: "Login exitoso", success: true, user: user });
+    if (user) {
+      res.status(200).json({ message: "Login exitoso", user: user });
+    } else {
+      res.status(404).json({ message: "Usuario no encontrado" });
+    }
+   
   } catch (error) {
     res.status(500).json({ error: "Ha ocurrido un error" });
   }
