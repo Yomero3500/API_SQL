@@ -26,10 +26,11 @@ router.post("/login",async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-  const {email, password } = req.body;
+  const {name, email, password } = req.body;
   try { 
     await Usuario.sync()
     const usuario = await Usuario.create({
+      name: name,
       email: email,
       password: password
     });
