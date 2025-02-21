@@ -19,6 +19,11 @@ const Product = sequelize.define('Product', {
     imagen:{
         type: DataTypes.BLOB("medium"),
         allowNull: false
+    },
+    cantidad:{
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     }
 },
  {

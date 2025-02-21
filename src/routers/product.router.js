@@ -42,7 +42,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 router.post("/", upload.single("image"), async (req, res) => {
-  const { nombre, precio } = req.body;
+  const { nombre, precio,cantidad } = req.body;
   const imagenBuffer = req.file ? req.file.buffer : null;
   try {
     await Product.sync();
@@ -50,6 +50,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       nombre: nombre,
       precio: precio,
       imagen: imagenBuffer,
+      cantidad: cantidad
     });
     res.json(producto);
   } catch (error) {
@@ -59,7 +60,7 @@ router.post("/", upload.single("image"), async (req, res) => {
 });
 
 router.put("/",upload.single("image"), async (req, res) => {
-    const { nombre, nuevoNombre, precio } = req.body;
+    const { nombre, nuevoNombre, precio, cantidad } = req.body;
     const imagenBuffer = req.file ? req.file.buffer : null;
     try {
       const product = await Product.findOne({ where: { nombre: nombre } });
@@ -69,6 +70,7 @@ router.put("/",upload.single("image"), async (req, res) => {
         product.nombre = nuevoNombre || product.nombre;
         product.precio = precio || product.precio;
         product.imagen = imagenBuffer || product.imagen;
+        product.cantidad = cantidad || product.cantidad;
         await product.save();
         res.json(product);
       } else {
