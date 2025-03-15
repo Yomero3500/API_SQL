@@ -23,6 +23,24 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    const products = await Product.findAll({where: {user_id: id}});
+      const productsWithBase64Images = products.map(product => {
+          return {
+              ...product.get(),
+              imagen: product.imagen ? product.imagen.toString('base64') : null,
+          };
+      });
+
+    res.json(productsWithBase64Images);
+  } catch (error) {
+    res.status(500).json({ error: "Ha ocurrido un error" });
+    console.log(error);
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
     const product = await Product.findOne({ where: { id: id } });
     if (product) {
        const productWithBase64Image = {

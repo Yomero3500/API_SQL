@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://10.1.0.130:3000/users/ HTTP/1.1
+GET http://localhost:3000/products/1 HTTP/1.1
 
 ###
 POST http://10.1.0.130:3000/users/login/ HTTP/1.1

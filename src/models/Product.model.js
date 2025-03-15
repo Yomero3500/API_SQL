@@ -1,8 +1,9 @@
 const sequelize = require('../database');
+const Usuario = require('./Usuario.model')
 const {DataTypes} = require('sequelize');
 
 const Product = sequelize.define('Product', {   
-    id: {
+    product_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -18,12 +19,21 @@ const Product = sequelize.define('Product', {
     },
     imagen:{
         type: DataTypes.BLOB("medium"),
-        allowNull: false
+        allowNull: true
     },
     cantidad:{
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0
+    },
+    user_id:{
+        type: DataTypes.INTEGER,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        references: {
+            model: Usuario,
+            key: 'user_id',
+        }
     }
 },
  {
