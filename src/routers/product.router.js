@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/all/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const products = await Product.findAll({where: {user_id: id}});
@@ -41,7 +41,7 @@ router.get("/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findOne({ where: { id: id } });
+    const product = await Product.findOne({ where: { product_id: id } });
     if (product) {
        const productWithBase64Image = {
         ...product.get(),
@@ -60,7 +60,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 router.post("/", upload.single("image"), async (req, res) => {
-  const { nombre, precio,cantidad } = req.body;
+  const { nombre, precio,cantidad, user_id } = req.body;
   const imagenBuffer = req.file ? req.file.buffer : null;
   try {
     await Product.sync();
@@ -68,7 +68,8 @@ router.post("/", upload.single("image"), async (req, res) => {
       nombre: nombre,
       precio: precio,
       imagen: imagenBuffer,
-      cantidad: cantidad
+      cantidad: cantidad,
+      user_id: user_id
     });
     res.json(producto);
   } catch (error) {

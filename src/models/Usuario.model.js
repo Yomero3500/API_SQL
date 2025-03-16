@@ -16,6 +16,10 @@ const Usuario= sequelize.define('Usuario', {
   },
   password: {
     type: DataTypes.STRING
+  },
+  fcmToken: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 },
  {
