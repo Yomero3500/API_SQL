@@ -19,7 +19,7 @@ const Product = sequelize.define('Product', {
     },
     imagen:{
         type: DataTypes.BLOB("medium"),
-        allowNull: true
+        allowNull: true 
     },
     cantidad:{
         type: DataTypes.INTEGER,

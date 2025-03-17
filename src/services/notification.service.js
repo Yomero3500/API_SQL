@@ -3,7 +3,6 @@ const Usuario = require('../models/Usuario.model');
 
 const registerFcmToken = async (userId, fcmToken) => {
     try {
-        // Guarda el token en la base de datos, asociándolo con el userId
         await Usuario.update({ fcmToken: fcmToken }, { where: { user_id: userId } });
         console.log(`Token ${fcmToken} registrado para el usuario ${userId}`);
     } catch (error) {
@@ -14,7 +13,6 @@ const registerFcmToken = async (userId, fcmToken) => {
 
 const sendPushNotification = async (user_id, title, body, data) => {
     try {
-        // Busca el token FCM del usuario en la base de datos
         const user = await Usuario.findByPk(user_id);
         if (!user) {
             throw new Error("Usuario no encontrado");
@@ -31,7 +29,7 @@ const sendPushNotification = async (user_id, title, body, data) => {
                 title: title,
                 body: body
             },
-            data: data,  // Opcional: datos adicionales
+            data: data,  
             token: fcmToken
         };
 

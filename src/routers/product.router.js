@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Product = require('../models/Product.model');
 const multer = require("multer");
 const { Op } = require('sequelize');
+const NotificationService = require('../services/notification.service');
 
 router.get("/", async (req, res) => {
   try {
@@ -91,6 +92,13 @@ router.put("/",upload.single("image"), async (req, res) => {
         product.imagen = imagenBuffer || product.imagen;
         product.cantidad = cantidad || product.cantidad;
         await product.save();
+        if (product.cantidad <10){
+          const title = "Producto con stock bajo";
+          const body = `El producto ${product.nombre} tiene un stock bajo, solo quedan ${product.cantidad} unidades`;
+          const data = { product_id: product.product_id };
+          await NotificationService.sendPushNotification(product.user_id, title, body, data);
+          
+        }
         res.json(product);
       } else {
         res.status(404).json({ error: "Producto no encontrado" });

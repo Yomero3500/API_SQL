@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const NotificationService = require('../services/notification.service');
 
-// Endpoint para registrar el token FCM
 router.post("/register-fcm-token", async (req, res) => {
     const { user_id, fcmToken } = req.body;
 
@@ -19,7 +18,6 @@ router.post("/register-fcm-token", async (req, res) => {
     }
 });
 
-// Endpoint para enviar una notificación push (ejemplo)
 router.post("/send-push-notification", async (req, res) => {
     const { userId, title, body, data } = req.body;
 
