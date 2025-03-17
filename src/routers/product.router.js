@@ -85,8 +85,6 @@ router.put("/",upload.single("image"), async (req, res) => {
     try {
       const product = await Product.findOne({ where: { nombre: nombre } });
       if (product) {
-        console.log(product);
-        
         product.nombre = nuevoNombre || product.nombre;
         product.precio = precio || product.precio;
         product.imagen = imagenBuffer || product.imagen;
@@ -95,7 +93,7 @@ router.put("/",upload.single("image"), async (req, res) => {
         if (product.cantidad <10){
           const title = "Producto con stock bajo";
           const body = `El producto ${product.nombre} tiene un stock bajo, solo quedan ${product.cantidad} unidades`;
-          const data = { product_id: product.product_id };
+          const data = { "El valor": "de la data" };
           await NotificationService.sendPushNotification(product.user_id, title, body, data);
           
         }
